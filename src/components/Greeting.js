@@ -1,12 +1,15 @@
 import React from 'react';
 import '../Greeting.css';
 
-const Greeting = ({isSubmitted, message, submitGreeting}) => {
+const Greeting = ({isSubmitted, messages, submitGreeting}) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     e.target.blur();
     submitGreeting(e.target.message.value);
+    e.target.reset();
   }
+
+  console.log(messages);
 
   return (
     <div>
@@ -14,7 +17,14 @@ const Greeting = ({isSubmitted, message, submitGreeting}) => {
         <div className="cat-response">{isSubmitted ? "Meow" : ""}</div>
         <input name="message" type="text" placeholder="Say Hi."/>
         <button type="submit">Submit</button>
-        <div className="message">{isSubmitted ? message : ""}</div>
+        <div className="messages">{messages.map((message) => {
+            return (
+              <div key={message.id}>
+                {message.text}
+              </div>
+            )
+          })}
+        </div>
       </form>
     </div>
   )

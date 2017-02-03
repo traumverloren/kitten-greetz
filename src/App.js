@@ -9,23 +9,25 @@ import Greeting from './components/Greeting'
 const mapStateToProps = (state) => {
   return {
     isSubmitted: state.isSubmitted,
-    message: state.message,
+    messages: state.messages,
   };
 };
 
+let nextMessageId = 0
+
 const mapDispatchToProps = (dispatch) => ({
-    submitGreeting(message) {
-      dispatch({type: 'PRESS_BUTTON', isSubmitted: true, message});
-    },
+  submitGreeting(message) {
+    dispatch({type: 'PRESS_BUTTON', isSubmitted: true, id: nextMessageId++, text: message});
+  },
 });
 
 const GreetingContainer = connect(mapStateToProps,mapDispatchToProps)(Greeting);
 
-const reducer = (state = { isSubmitted: false, message: '' }, action) => {
+const reducer = (state = { isSubmitted: false, messages: [] }, action) => {
 
   switch(action.type){
     case 'PRESS_BUTTON':
-      return { isSubmitted: action.isSubmitted, message: action.message };
+      return { isSubmitted: action.isSubmitted, messages: [...state.messages, {id: action.id, text: action.text}] };
     default:
       return state;
   }
