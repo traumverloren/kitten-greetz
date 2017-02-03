@@ -17,7 +17,12 @@ const Greeting = ({isSubmitted, messages, submitGreeting}) => {
         <div className="cat-response">{isSubmitted ? "Meow" : ""}</div>
         <input name="message" type="text" placeholder="Say Hi."/>
         <button type="submit">Submit</button>
-        <div className="messages">{messages.map((message) => {
+        <div className="messages-title">
+          {isSubmitted ? 'Your Messages:' : ''}
+        </div>
+        <div className="messages">
+
+          {messages.map((message) => {
             return (
               <div key={message.id}>
                 {message.text}
