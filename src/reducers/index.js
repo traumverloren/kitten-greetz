@@ -1,4 +1,5 @@
 const reducer = (state = { isSubmitted: false, messages: [] }, action) => {
+  console.log(action.type);
 
   switch(action.type){
     case 'PRESS_BUTTON':

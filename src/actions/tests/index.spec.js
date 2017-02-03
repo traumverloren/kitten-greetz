@@ -1,4 +1,4 @@
-import * as actions from '../index'
+import * as actions from '../index';
 
 describe('actions', () => {
   it('should create an action to send a message', () => {
