@@ -3,8 +3,9 @@ import kitten from './images/paralyzed-kitten-lego-wheelchair.png';
 import './App.css';
 import { Provider, connect } from 'react-redux';
 import { createStore } from 'redux';
-import Greeting from './components/Greeting'
-
+import Greeting from './components/Greeting';
+import reducer from './reducers';
+import { sendGreeting } from './actions'
 
 const mapStateToProps = (state) => {
   return {
@@ -13,25 +14,13 @@ const mapStateToProps = (state) => {
   };
 };
 
-let nextMessageId = 0
-
 const mapDispatchToProps = (dispatch) => ({
   submitGreeting(message) {
-    dispatch({type: 'PRESS_BUTTON', isSubmitted: true, id: nextMessageId++, text: message});
+    dispatch(sendGreeting(message));
   },
 });
 
 const GreetingContainer = connect(mapStateToProps,mapDispatchToProps)(Greeting);
-
-const reducer = (state = { isSubmitted: false, messages: [] }, action) => {
-
-  switch(action.type){
-    case 'PRESS_BUTTON':
-      return { isSubmitted: action.isSubmitted, messages: [...state.messages, {id: action.id, text: action.text}] };
-    default:
-      return state;
-  }
-};
 
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 

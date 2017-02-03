@@ -18,6 +18,7 @@ form {
 .messages-title {
   font-size: 16px;
   color: purple;
+  margin-bottom: 10px;
 }
 
 input[type=text] {

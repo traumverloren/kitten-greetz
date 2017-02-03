@@ -5,7 +5,8 @@ const Greeting = ({isSubmitted, messages, submitGreeting}) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     e.target.blur();
-    submitGreeting(e.target.message.value);
+    const message = e.target.message.value;
+    submitGreeting(message);
     e.target.reset();
   }
 
